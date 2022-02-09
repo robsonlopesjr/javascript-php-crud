@@ -1,11 +1,11 @@
-const tbody = document.querySelector("tbody");
+const tbody = document.querySelector(".list-users");
 
-const usersList = async () => {
-    const data = await fetch("./list.php");
+const usersList = async (page) => {
+    const data = await fetch("./list.php?page=" + page);
 
     const response = await data.text();
 
     tbody.innerHTML = response;
 }
 
-usersList();
+usersList(1);
