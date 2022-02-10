@@ -20,31 +20,38 @@ usersList(1);
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const formData = new FormData(form);
-    formData.append("add", 1);
-
     document.getElementById("btn-add-user").disabled = true;
     document.getElementById("btn-add-user").value = "Salvando...";
 
-    const data = await fetch("create.php", {
-        method: "POST",
-        body: formData
-    });
-
-    const response = await data.json();
-
-    if (response['erro']) {
-        msgAlertErro.innerHTML = response['msg'];
+    if (document.getElementById("name").value === "") {
+        msgAlertErro.innerHTML = "<div class='alert alert-warning' role='alert'>Erro: Necessário preencher o campo nome!</div>";
+    } else if (document.getElementById("email").value === "") {
+        msgAlertErro.innerHTML = "<div class='alert alert-warning' role='alert'>Erro:  Necessário preencher o campo email!</div>";
     } else {
-        msgAlert.innerHTML = response['msg'];
 
-        form.reset();
+        const formData = new FormData(form);
+        formData.append("add", 1);
 
-        addUserModal.hide();
+        const data = await fetch("create.php", {
+            method: "POST",
+            body: formData
+        });
 
-        usersList(1);
+        const response = await data.json();
 
-        document.getElementById("btn-add-user").disabled = false;
-        document.getElementById("btn-add-user").value = "Cadastrar";
+        if (response['erro']) {
+            msgAlertErro.innerHTML = response['msg'];
+        } else {
+            msgAlert.innerHTML = response['msg'];
+
+            form.reset();
+
+            addUserModal.hide();
+
+            usersList(1);
+        }
     }
+
+    document.getElementById("btn-add-user").disabled = false;
+    document.getElementById("btn-add-user").value = "Cadastrar";
 });
