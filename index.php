@@ -17,16 +17,53 @@ include_once "./config/connection.php";
 <body>
     <div class="container">
         <div class="row mt-4">
-            <div class="col-lg-12">
-                <h4>Listar Usuários</h4>
+            <div class="col-lg-12 d-flex justify-content-between align-items-center">
+                <div>
+                    <h4>Listar Usuários</h4>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                        Cadastrar
+                    </button>
+                </div>
             </div>
         </div>
 
         <hr />
 
+        <span id="msgAlert"></span>
+
         <div class="row">
             <div class="col-lg-12">
                 <span class="list-users"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addUserModal">Cadastrar Usuário</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="form-add-user">
+                    <span id="msgAlertErro"></span>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="name" class="col-form-label">Nome:</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Digite o nome completo..." required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="col-form-label">E-mail:</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Digite o e-mail..." required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Fechar</button>
+                        <input type="submit" class="btn btn-outline-success btn-sm" value="Cadastrar" id="btn-add-user" />
+                    </div>
+                </form>
             </div>
         </div>
     </div>
