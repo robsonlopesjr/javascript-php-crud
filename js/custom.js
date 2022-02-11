@@ -1,11 +1,14 @@
 const tbody = document.querySelector(".list-users");
 
 const form = document.getElementById("form-add-user");
+const formEditUser = document.getElementById("form-edit-user");
 
-const msgAlertErro = document.getElementById("msgAlertErro");
 const msgAlert = document.getElementById("msgAlert");
+const msgAlertErro = document.getElementById("msgAlertErro");
+const msgAlertEdit = document.getElementById("msgAlertEdit");
 
 const addUserModal = new bootstrap.Modal(document.getElementById("addUserModal"));
+const editUserModal = new bootstrap.Modal(document.getElementById('editUserModal'));
 
 const usersList = async (page) => {
     const data = await fetch("./list.php?page=" + page);
@@ -64,7 +67,7 @@ async function showUser(id) {
     if (response['erro']) {
         msgAlert.innerHTML = response['msg'];
     } else {
-        const showModal = new bootstrap.Modal(document.getElementById('showUserModal'));
+        const showUserModal = new bootstrap.Modal(document.getElementById('showUserModal'));
 
         document.getElementById("showId").innerHTML = response['data'].id;
 
@@ -72,6 +75,62 @@ async function showUser(id) {
 
         document.getElementById("showEmail").innerHTML = response['data'].email;
 
-        showModal.show();
+        showUserModal.show();
     }
 }
+
+async function editUser(id) {
+    msgAlertEdit.innerHTML = "";
+
+    const data = await fetch('show.php?id=' + id);
+
+    const response = await data.json();
+
+    if (response['erro']) {
+
+        msgAlertEdit.innerHTML = response['msg'];
+    } else {
+        document.getElementById("editUserId").value = response['data'].id;
+
+        document.getElementById("editUserName").value = response['data'].name;
+
+        document.getElementById("editUserEmail").value = response['data'].email;
+
+        editUserModal.show();
+    }
+}
+
+formEditUser.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    document.getElementById("btn-edit-user").disabled = true;
+    document.getElementById("btn-edit-user").value = "Salvando...";
+
+    if (document.getElementById("editUserId").value === "") {
+        msgAlertErro.innerHTML = "<div class='alert alert-warning' role='alert'>Erro: Tente novamente mais tarde!</div>";
+    } else if (document.getElementById("editUserName").value === "") {
+        msgAlertErro.innerHTML = "<div class='alert alert-warning' role='alert'>Erro: Necessário preencher o campo nome!</div>";
+    } else if (document.getElementById("editUserEmail").value === "") {
+        msgAlertErro.innerHTML = "<div class='alert alert-warning' role='alert'>Erro:  Necessário preencher o campo email!</div>";
+    } else {
+        const formData = new FormData(formEditUser);
+
+        const data = await fetch("edit.php", {
+            method: "POST",
+            body: formData
+        });
+
+        const response = await data.json();
+
+        if (response['erro']) {
+            msgAlertEdit.innerHTML = response['msg'];
+        } else {
+            msgAlertEdit.innerHTML = response['msg'];
+
+            usersList(1);
+        }
+    }
+
+    document.getElementById("btn-edit-user").disabled = false;
+    document.getElementById("btn-edit-user").value = "Atualizar";
+});

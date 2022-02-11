@@ -95,6 +95,36 @@ include_once "./config/connection.php";
         </div>
     </div>
 
+
+    <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editUserModal">Editar Usuário</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="form-edit-user">
+                    <span id="msgAlertEdit"></span>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="name" class="col-form-label">Nome:</label>
+                            <input type="text" class="form-control" id="editUserName" name="editUserName" placeholder="Digite o nome completo..." required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="col-form-label">E-mail:</label>
+                            <input type="email" class="form-control" id="editUserEmail" name="editUserEmail" placeholder="Digite o e-mail..." required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" id="editUserId" name="editUserId">
+                        <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Fechar</button>
+                        <input type="submit" class="btn btn-outline-success btn-sm" value="Atualizar" id="btn-edit-user" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="./js/custom.js"></script>
 </body>
