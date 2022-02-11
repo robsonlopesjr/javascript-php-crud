@@ -36,6 +36,7 @@ if (!empty($page)) {
         $data .= "<td>";
         $data .= "<button id='$id' class='btn btn-sm btn-outline-primary' onClick='showUser($id)'>Visualizar</button>";
         $data .= "<button id='$id' class='btn btn-sm btn-outline-warning' onClick='editUser($id)'>Editar</button>";
+        $data .= "<button id='$id' class='btn btn-sm btn-outline-danger' onClick='deleteUser($id)'>Apagar</button>";
         $data .= "</td>";
         $data .= "</tr>";
     }

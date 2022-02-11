@@ -134,3 +134,22 @@ formEditUser.addEventListener("submit", async (e) => {
     document.getElementById("btn-edit-user").disabled = false;
     document.getElementById("btn-edit-user").value = "Atualizar";
 });
+
+async function deleteUser(id) {
+    var confirmDestroy = confirm("Tem certeza que deseja excluir o registro informado?");
+
+    if (confirmDestroy) {
+        const data = await fetch('delete.php?id=' + id);
+
+        const response = await data.json();
+
+        if (response['erro']) {
+            msgAlert.innerHTML = response['msg'];
+        } else {
+            msgAlert.innerHTML = response['msg'];
+
+            usersList(1);
+        }
+    }
+
+}
