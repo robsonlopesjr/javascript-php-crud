@@ -29,7 +29,7 @@ if (!empty($page)) {
 
     while ($row_user = $result_users->fetch(PDO::FETCH_ASSOC)) {
         extract($row_user);
-        $data .= "<tr><td>$id</td><td>$name</td><td>$email</td><td>Ações</td></tr>";
+        $data .= "<tr><td>$id</td><td>$name</td><td>$email</td><td><button id='$id' class='btn btn-sm btn-outline-primary' onClick='showUser($id)'>Visualizar</button></td></tr>";
     }
 
     $data .= "</tbody></table></div>";

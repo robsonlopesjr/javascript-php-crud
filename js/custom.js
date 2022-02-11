@@ -55,3 +55,23 @@ form.addEventListener("submit", async (e) => {
     document.getElementById("btn-add-user").disabled = false;
     document.getElementById("btn-add-user").value = "Cadastrar";
 });
+
+async function showUser(id) {
+    const data = await fetch('show.php?id=' + id);
+
+    const response = await data.json();
+
+    if (response['erro']) {
+        msgAlert.innerHTML = response['msg'];
+    } else {
+        const showModal = new bootstrap.Modal(document.getElementById('showUserModal'));
+
+        document.getElementById("showId").innerHTML = response['data'].id;
+
+        document.getElementById("showName").innerHTML = response['data'].name;
+
+        document.getElementById("showEmail").innerHTML = response['data'].email;
+
+        showModal.show();
+    }
+}

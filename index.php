@@ -68,6 +68,33 @@ include_once "./config/connection.php";
         </div>
     </div>
 
+    <div class="modal fade" id="showUserModal" tabindex="-1" aria-labelledby="showUserModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="showUserModal">Detalhes do Usuário</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <span id="msgAlertErroShow"></span>
+                <div class="modal-body">
+                    <dl class="row">
+                        <dt class="col-sm-3">ID</dt>
+                        <dd class="col-sm-9"><span id="showId"></span></dd>
+
+                        <dt class="col-sm-3">Nome</dt>
+                        <dd class="col-sm-9"><span id="showName"></span></dd>
+
+                        <dt class="col-sm-3">E-mail</dt>
+                        <dd class="col-sm-9"><span id="showEmail"></span></dd>
+                    </dl>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="./js/custom.js"></script>
 </body>
